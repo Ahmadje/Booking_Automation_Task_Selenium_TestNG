@@ -3,6 +3,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import utils.BrowsersEnum;
 import utils.ConfigLoader;
 import utils.DriverManager;
 import utils.JSONUtils;
@@ -13,8 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Duration;
 
-import static org.openqa.selenium.remote.Browser.*;
-import static utils.DriverManager.getBrowser;
+import static utils.DriverManager.selectBrowser;
 import static utils.ScreenshotUtils.takeScreenShot;
 
 public class T00_Hooks {
@@ -24,7 +24,7 @@ public class T00_Hooks {
 
     @BeforeSuite
     public void setUp() {
-        DriverManager.setDriver(getBrowser(ConfigLoader.getInstance().getBrowser()));
+        DriverManager.setDriver(selectBrowser(BrowsersEnum.valueOf(ConfigLoader.getInstance().getBrowser())));
         DriverManager.getDriver().manage().window().maximize();
         DriverManager.getDriver().get(ConfigLoader.getInstance().getURL());
         DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

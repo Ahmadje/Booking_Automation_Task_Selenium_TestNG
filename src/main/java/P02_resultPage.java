@@ -82,9 +82,17 @@ public class P02_resultPage {
         }
     }
     public WebElement get2ndResultImage(){
-        return driver.findElement(By.xpath("(//a[@data-testid=\"property-card-desktop-single-image\"])[2]/img"));
+        try {
+            return driver.findElement(By.xpath("(//a[@data-testid=\"property-card-desktop-single-image\"])[2]/img"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     public WebElement getSignInFrame(){
-        return driver.findElement(By.xpath("//iframe[@title=\"مربع حوار تسجيل الدخول باستخدام حساب Google\" or @title=\"Sign in with Google Dialog\"]"));
+        try {
+            return driver.findElement(By.xpath("//iframe[@title=\"مربع حوار تسجيل الدخول باستخدام حساب Google\" or @title=\"Sign in with Google Dialog\"]"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

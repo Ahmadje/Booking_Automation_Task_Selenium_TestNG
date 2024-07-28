@@ -47,7 +47,7 @@ public class ConfigLoader {
 		return getPropertyValue(URL);
 	}
 	public String getBrowser() {
-		return getPropertyValue(BROWSER);
+		return getPropertyValue(BROWSER).toUpperCase();
 	}
 
 }
