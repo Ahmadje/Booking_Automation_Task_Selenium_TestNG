@@ -4,8 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.Browser;
 
-import static utils.DriverManager.BrowserName.*;
+import static org.openqa.selenium.remote.Browser.*;
+
 
 public final class DriverManager {
 
@@ -26,6 +28,16 @@ public final class DriverManager {
         driver.remove();
     }
 
+    public static WebDriver getBrowser(String browserName) throws IllegalArgumentException {
+        return switch (browserName) {
+            case "chrome" -> new ChromeDriver();
+            case "firefox" -> new FirefoxDriver();
+            case "edge" -> new EdgeDriver();
+            default -> throw new IllegalArgumentException("Unsupported browser: " + browserName);
+        };
+
+
+/*  ///// USING ENUMS
     public static WebDriver getBrowser(BrowserName browserName) throws IllegalArgumentException {
         switch (browserName) {
             case CHROME:
@@ -36,20 +48,6 @@ public final class DriverManager {
                 return new EdgeDriver();
             default:
                 throw new IllegalArgumentException("Unsupported browser: " + browserName);
-
-        }
-//        if (browserName.equalsIgnoreCase(FIREFOX.name())) {
-//            FirefoxDriver firefoxDriver = new FirefoxDriver();
-//            return firefoxDriver;
-//        } else if (browserName.equalsIgnoreCase(EDGE.name())) {
-//            EdgeDriver edgeDriver = new EdgeDriver();
-//            return edgeDriver;
-//        } else {
-//            ChromeDriver chromeDriver = new ChromeDriver();
-//            return chromeDriver;
-//        }
-    }
-
     public enum BrowserName {
         CHROME("chrome"), FIREFOX("firefox"), EDGE("edge");
 
@@ -59,5 +57,8 @@ public final class DriverManager {
             this.browserName = browserName;
         }
     }
+*/
 
+
+    }
 }

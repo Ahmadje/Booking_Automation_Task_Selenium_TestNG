@@ -30,7 +30,7 @@ public class T01_SecondHotel extends T00_Hooks {
     @Test(description = "Search for destination in specific dates")
     public void search() throws InterruptedException, FileNotFoundException {
         home = new P01_homePage(DriverManager.getDriver());
-        home.chooseDestination(testData.getTestData("destination"));
+        home.chooseDestination(getTestData("destination"));
         home.selectDate(checkInDate, checkOutDate);
         home.clickSubmitBtn();
         result = new P02_resultPage(DriverManager.getDriver());

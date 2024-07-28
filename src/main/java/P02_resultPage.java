@@ -13,7 +13,7 @@ public class P02_resultPage {
 
     @Step("Scrolling to Result")
     public void scrollTo2ndResult() throws InterruptedException {
-        while (P01_homePage.alertStatus){
+        if (P01_homePage.alertStatus){
             try {
                 if (driver.findElement(closeSignInAlert).isDisplayed() == true) {
                     driver.findElement(closeSignInAlert).click();
@@ -52,18 +52,34 @@ public class P02_resultPage {
     }
 
     public WebElement get2ndResultRating(){
-        return driver.findElement(By.xpath("((//div[@data-testid=\"review-score\"])[2]/div)[1]"));
+        try {
+            return driver.findElement(By.xpath("((//div[@data-testid=\"review-score\"])[2]/div)[1]"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public WebElement get2ndResultRatingText(){
-        return driver.findElement(By.xpath("(((//div[@data-testid=\"review-score\"])[2]/div)[2]/div)[1]"));
+        try {
+            return driver.findElement(By.xpath("(((//div[@data-testid=\"review-score\"])[2]/div)[2]/div)[1]"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public WebElement get2ndResultTitle(){
-        return driver.findElement(By.xpath("(//a[@data-testid=\"title-link\"]/div[@data-testid=\"title\"])[2]"));
+        try {
+            return driver.findElement(By.xpath("(//a[@data-testid=\"title-link\"]/div[@data-testid=\"title\"])[2]"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     public WebElement get2ndResultPrice(){
-        return driver.findElement(By.xpath("(//span[@data-testid=\"price-and-discounted-price\"])[2]"));
+        try {
+            return driver.findElement(By.xpath("(//span[@data-testid=\"price-and-discounted-price\"])[2]"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     public WebElement get2ndResultImage(){
         return driver.findElement(By.xpath("(//a[@data-testid=\"property-card-desktop-single-image\"])[2]/img"));

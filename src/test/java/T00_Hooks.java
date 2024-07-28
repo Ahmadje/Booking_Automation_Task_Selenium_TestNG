@@ -1,11 +1,9 @@
 import io.qameta.allure.Allure;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import utils.ConfigLoader;
 import utils.DriverManager;
 import utils.JSONUtils;
 
@@ -13,10 +11,9 @@ import utils.JSONUtils;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
-import static utils.DriverManager.BrowserName.CHROME;
-import static utils.DriverManager.BrowserName.FIREFOX;
+import static org.openqa.selenium.remote.Browser.*;
 import static utils.DriverManager.getBrowser;
 import static utils.ScreenshotUtils.takeScreenShot;
 
@@ -27,10 +24,10 @@ public class T00_Hooks {
 
     @BeforeSuite
     public void setUp() {
-        DriverManager.setDriver(getBrowser(CHROME));
+        DriverManager.setDriver(getBrowser(ConfigLoader.getInstance().getBrowser()));
         DriverManager.getDriver().manage().window().maximize();
-        DriverManager.getDriver().get("https://www.booking.com/");
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        DriverManager.getDriver().get(ConfigLoader.getInstance().getURL());
+        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @AfterMethod
@@ -53,7 +50,7 @@ public class T00_Hooks {
         }
     }
 
-    public String getTestData(String jsonPath) throws FileNotFoundException {
+    public static String getTestData(String jsonPath) throws FileNotFoundException {
         return testData.getTestData(jsonPath);
     }
 
